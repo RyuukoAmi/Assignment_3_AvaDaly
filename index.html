@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="UTF-8">
+        <title>Pokemon Game</title>
+        <link rel="stylesheet" href="style/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&display=swap" rel="stylesheet">
+        <style> @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&display=swap'); </style>
+	</head>
+    <body> 
+        <div id="boxOutline">
+            <div id="enemyHealthBar">
+                <p id="enemyHealthBarText">enemy health bar text</p>
+                <div id="enemyHealthBarProgress">|</div>
+            </div>
+            <div id="enemySprite">
+                <img id="enemySpriteImg" src="assets/MagikarpEnemy.gif">
+            </div>
+            
+            <div id="playerSprite">
+                <img id="playerSpriteImg" src="assets/PidgeotPlayer.gif">
+            </div>
+            <div id="playerHealthBar">
+                <p id="playerHealthBarText">player health bar text</p>
+                <div id="playerHealthBarProgress">|</div>
+            </div>
+            <div id="alertBox">
+                <p id="alertBoxText">Alert Box</p>
+                <div id="buttonContainer">
+                    <div id="button1" class="buttonbox">button1</div>
+                    <div id="button2" class="buttonbox">button2</div>
+                    <div id="button3" class="buttonbox">button3</div>
+                    <div id="button4" class="buttonbox">button4</div>
+                </div>  
+            </div>
+            
+    </div>
+    <div id="firstForms">
+        <form name="pokemonselection" method="post">
+            <div>
+                <p>Your name...</p>
+                    <input type="text" id="pname" placeholder="Your name.." value="Blue">
+                <p>Your Rival's Name...</p>
+                    <input type="text" id="ename" placeholder="Your Rival's name.." value="Red"><br>
+            </div>
+            <div>
+                <p>Your Team... </p>
+                    <label for="pokemon1">Pokemon 1:</label>
+                    <select id="pokemon1" name="pokemon1"><option value="magikarp">Magikarp</option>
+                        <option value="venusaur">Venusaur</option>
+                        <option value="charizard">Charizard</option>
+                        <option value="blastoise">Blastoise</option>
+                        <option value="pidgeot">Pidgeot</option>
+                        <option value="ninetails">Ninetails</option>
+                        <option value="raichu">Raichu</option>
+                        <option value="snorlax">Snorlax</option>
+                    </select>
+                    <br>
+                    <label for="pokemon2">Pokemon 2:</label>
+                    <select id="pokemon2" name="pokemon2"> 
+                        <option value="charizard">Charizard</option>
+                        <option value="venusaur">Venusaur</option>
+                        <option value="blastoise">Blastoise</option>
+                        <option value="pidgeot">Pidgeot</option>
+                        <option value="magikarp">Magikarp</option>
+                        <option value="ninetails">Ninetails</option>
+                        <option value="raichu">Raichu</option>
+                        <option value="snorlax">Snorlax</option>      
+                    </select>
+                    <br>
+                    <label for="pokemon3">Pokemon 3:</label>
+                    <select id="pokemon3" name="pokemon3"> 
+                        <option value="blastoise">Blastoise</option>
+                        <option value="charizard">Charizard</option>
+                        <option value="venusaur">Venusaur</option>
+                        <option value="pidgeot">Pidgeot</option>
+                        <option value="magikarp">Magikarp</option>
+                        <option value="ninetails">Ninetails</option>
+                        <option value="raichu">Raichu</option>
+                        <option value="snorlax">Snorlax</option>
+                        </select>
+                </div>
+                <div> <button type="button" onclick="validatePokemonForm()" autofocus>
+                Submit
+            </button></div>
+           
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    </body>
+</html>

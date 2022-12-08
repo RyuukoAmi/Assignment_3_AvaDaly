@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- notes
+https://bulbapedia.bulbagarden.net/wiki/Water_Gun_(move)
+https://bulbapedia.bulbagarden.net/wiki/Ember_(move)
+https://bulbapedia.bulbagarden.net/wiki/Vine_Whip_(move)
+https://bulbapedia.bulbagarden.net/wiki/Scratch_(move)
+https://bulbapedia.bulbagarden.net/wiki/Tackle_(move)
+https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_battle#Bag
+-->
+</head>
+<body>
+<script type="text/javascript">
+//variable and funtion setup
+const numberRangeModifier = (max) =>{
+  var additive = Math.round(Math.random()*10)
+  console.log(`random ${additive}`);
+  if (additive >= 0 && additive <= max ){
+    return additive;
+  }else{
+    numberRangeModifier(max)
+  }
+};
+          //asks user for their pokemon
+const choosePokemon = () =>{
+	var userPokemon = prompt('you have three pokemon to choose from, those being Charmander, Bulbasaur and Squirtle. Which one will you use for this battle?').toLowerCase();
+	switch (userPokemon){
+		case 'charmander':
+			alert('you have chosen Charmander!');
+			return userPokemon;
+			break;
+		case 'bulbasaur':
+			alert('You have chosen Bulbasaur!');
+      		return userPokemon;
+			break;
+		case 'squirtle':
+			alert('You have chosen Squirtle!');
+      		return userPokemon;
+			break;
+		default:
+			alert('You don\'t have this pokemon!');
+			//loops function untill a valid input is given
+			return choosePokemon();
+	}	
+};
+//randomise enemy pokemon
+const randomPokemon = (userPokemon) =>{
+  var random = Boolean(Math.round(Math.random()*1.01))
+  //debug console.log(random)
+  switch (userPokemon){
+    case 'charmander':
+      var cow = (random ? 'bulbasaur': 'squirtle');
+      alert(`Your opponent has chosen ${cow}!`)
+      break;
+    case 'bulbasaur':
+			var cow=(random ? 'charmander':  'squirtle');
+      alert(`Your opponent has chosen ${cow}!`);
+			break;
+		case 'squirtle':
+			var cow = (random ? 'bulbasaur': 'bulbasaur');    
+      alert(`Your opponent has chosen ${cow}!`);
+      break;
+  }
+  return cow;
+};
+//assigning move sets to user and enemy pokemon
+const assignMoveSets = (pokemon) =>{
+  switch (pokemon){
+   case 'charmander':
+    return ['scratch','ember'];
+   	break;
+   case 'bulbasaur':
+     return ['tackle','vine whip'];
+     break;
+  case 'squirtle':
+     return ['tackle','water gun'];
+     break;
+	}
+};
+//user round interface
+const userRound = (userActiveMove) =>{
+  switch (prompt(`It\'s your turn!\n${userPokemon} has ${userHealth} HP. ${enemyPokemon} has ${enemyHealth} HP.\n What would you like to do?\n Bag or fight`).toLowerCase()){// bag, fight or other
+    case 'bag':
+      switch (prompt(`You have ${userHealthPotions} health potions, and ${userEnhancPotions} enhancment potions left.  Would you like to use one?\nHealth, Enhancment, or back`).toLowerCase()){
+       case 'health'://uses health potion
+       	  console.log(`userhealth ${userHealth}`)
+          healthPotionAlert = (30 + numberRangeModifier(10))
+          alert(`${userPokemon} has gained ${healthPotionAlert} HP!`)
+          userHealth += healthPotionAlert;
+          if (userHealth >= 100){
+           userHealth = 100
+           }
+          userHealthPotions -=1
+          break;
+        case 'enhancment':
+          alert('this is still in development')
+          break;
+        default:
+          userRound(userActiveMove);
+        break;
+    }
+    break;
+  case 'fight': //choise of move
+  userActiveMove = prompt(`Your available moves are ${userMove1} and ${userMove2}. `).toLowerCase()
+    if (userActiveMove == userMove1 || userActiveMove == userMove2 ){ //if the user chooses a valid move
+      alert(`${userPokemon} used ${userActiveMove}!`)
+      console.log(`enemy health before attack ${enemyHealth}`)
+      console.log(`damage delt before attack ${damageDelt}`)
+      damageDelt = (26 + numberRangeModifier(15));
+      if (damageDelt >= 33){ //if its super efective, say so
+        alert('It was super effective!')
+      };
+      alert(`${userPokemon} delt ${damageDelt} HP!`);
+      enemyHealth -= damageDelt;
+      console.log(`enemy health after attack ${enemyHealth}`)
+      console.log(`damage delt after attack ${damageDelt}`)
+      damageDelt = 0;
+      
+    }else{ 
+      alert(`${userPokemon} doesn\'t have that move!`);
+      userRound(userActiveMove);
+    };
+    break;
+    default:
+    alert('unknown command');
+    userRound(userActiveMove);
+    break;
+}
+}
+const enemyRound = (enemyPokemon, enemyMove1, enemyMove2) =>{
+  alert('It is your oponents turn.')
+  console.log(`enemy health${enemyHealth}`)
+    if (enemyHealth <= 50 && enemyHealthPotions >= 1){
+      console.log(`enemy health${enemyHealth}`)
+      healthPotionAlert = (30 + numberRangeModifier(20))
+      alert(`${enemyPokemon} has gained ${healthPotionAlert} HP!`)
+      enemyHealth += healthPotionAlert;
+      enemyHealthPotions -= 1
+      console.log(`enemy health potions${enemyHealthPotions}`)
+        if (enemyHealth >= 100){
+          enemyHealth = 100
+        }
+      console.log(`enemy health ${enemyHealth}`)
+    }else{
+     if (Boolean(Math.round(Math.random()))){
+       	enemyActiveMove = enemyMove1;
+     }else{enemyActiveMove = enemyMove2};
+      alert(`${enemyPokemon} used ${enemyActiveMove}!`)
+      damageDelt = (25 + numberRangeModifier(15))
+      if (damageDelt >= 33){ //if its super efective, say so
+        alert('It was super effective!');
+      };
+        alert(`${enemyPokemon} delt ${damageDelt} HP!`);
+        userHealth -= damageDelt;
+      
+    }
+console.log(`enemy health ${enemyHealth}`)
+
+}
+//running code
+//defining variables for hp and pp
+var userHealth = 100
+var userEnergy1 = 40
+var userEnergy2 = 40
+var enemyHealth = 200
+var enemyEnergy1 = 40
+var enemyEnergy2 = 40
+//defining the amount of restoritive and enhancment potions for user and computer
+var userHealthPotions = 3
+var userEnhancPotions = 3
+var enemyHealthPotions = 3
+var enemyEnhancPotions = 3
+//defining variables for health potion update to player
+var healthPotionAlert =30
+var damageDelt = 0
+var userActiveMove = ''
+var enemyActiveMove = ''
+//boolean for who wins battle
+var userWins = false
+//choosing pokemon for user and computer
+//here and on order matters
+var userPokemon = choosePokemon();
+var enemyPokemon = randomPokemon(userPokemon);
+//creating move sets and converting to strings
+var userMoveSet = assignMoveSets(userPokemon);
+var userMove1 = userMoveSet.slice(0,1)
+userMove1 = userMove1.toString()
+var userMove2 = userMoveSet.slice(1)
+userMove2 = userMove2.toString()
+var enemyMoveSet = assignMoveSets(enemyPokemon);
+var enemyMove1 = enemyMoveSet.slice(0,1)
+var enemyMove2 = enemyMoveSet.slice(1)
+//battle begining
+alert('The battle has begun!');
+do{
+	console.log('user turn')
+  userRound(userActiveMove);
+  if (enemyHealth <=0){
+    userWins = true;
+    break
+    };
+  console.log('enemy turn')
+  enemyRound(enemyPokemon, enemyMove1, enemyMove2)
+}while(userHealth >= 1 || enemyHealth >= 1);
+if (userWins){
+  alert(`${enemyPokemon} has fainted!\nYou won!`);
+  alert('You gained 34 EXP.');
+}else{
+  alert(`${userPokemon} has fainted!\nYou lost!`);
+};
+(confirm('Would you like to play again?'))? location.reload():alert('Goodbye!')
+//console logs
+console.log(`userPokemon ${userPokemon}`)
+console.log(`enemypokemon ${enemyPokemon}`);
+//debug console.log(`userMoveSet ${userMoveSet}`)
+console.log(`userMove1 ${userMove1}`)
+console.log(`userMove2 ${userMove2}`)
+//debug console.log(`enemyMoveSet ${enemyMoveSet}`)
+console.log(`enemyMove1 ${enemyMove1}`)
+console.log(`enemyMove2 ${enemyMove2}`)
+
+</script>
+</body>
+</html>
