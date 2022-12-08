@@ -289,7 +289,7 @@ const enemySwitchPokemon =()=> {
 				// enemyPokemon1 = null
 				var healthpercent = Math.round((activeEnemypokemon['activeHP']/activeEnemypokemon['hp'])*100)
 				console.log(`healthpercent = ${healthpercent}`)
-                $("#enemyHealthBarProgress").css(width, healthpercent + '%')
+                $("#enemyHealthBarProgress").css("width", healthpercent + '%')
 				// document.getElementById("enemyHealthBarProgress").style.width = healthpercent + '%';
 				document.getElementById("enemyHealthBarProgress").style.display ='block'
 				assignGif(activeEnemypokemon['name'], 'Enemy')
